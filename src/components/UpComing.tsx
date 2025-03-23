@@ -42,7 +42,11 @@ export function UpComing() {
           setError("A API não retornou uma lista válida.");
         }
       })
+<<<<<<< HEAD
       .catch((err) => {
+=======
+      .catch((err: Error) => {
+>>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
         console.error("Erro ao buscar os em breve:", err);
         setError("Erro ao carregar filmes.");
       });

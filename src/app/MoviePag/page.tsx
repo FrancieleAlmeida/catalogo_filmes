@@ -30,7 +30,11 @@ export default function Movies() {
         setMovies(data.results);
         setIsLoading(false);
       })
+<<<<<<< HEAD
       .catch((err) => {
+=======
+      .catch((err: Error) => {
+>>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
         setError("Erro ao carregar filmes. Tente novamente.");
         setIsLoading(false);
       });

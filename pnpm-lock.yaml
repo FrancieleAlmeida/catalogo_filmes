@@ -32,9 +32,12 @@ importers:
       react:
         specifier: ^19.0.0
         version: 19.0.0
+<<<<<<< HEAD
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+=======
+>>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
       tailwind-merge:
         specifier: ^3.0.2
         version: 3.0.2
