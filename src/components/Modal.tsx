@@ -1,17 +1,9 @@
 import React from "react";
+import Image from 'next/image';
+import { Movie } from '@/app/MovieList/page';
 
 interface ModalProps {
-  selectedMovie: {
-    id: number;
-    title: string;
-    poster_path: string;
-    release_date: string;
-    overview: string;
-    genres: { id: number; name: string }[];
-    runtime: number;
-    vote_average: number;
-    adult: boolean;
-  } | null;
+  selectedMovie: Movie | null;
   closeModal: () => void;
 }
 
@@ -28,10 +20,12 @@ export const Modal = ({ selectedMovie, closeModal }: ModalProps) => {
           &times;
         </button>
         <div className="flex flex-col md:flex-row gap-6">
-          <img
+          <Image
             src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`}
             alt={selectedMovie.title}
             className="w-full md:w-1/3 h-auto rounded-lg"
+            width={500}
+            height={750}
           />
           <div className="flex-1">
             <h2 className="text-2xl font-bold text-white">{selectedMovie.title}</h2>
@@ -40,19 +34,24 @@ export const Modal = ({ selectedMovie, closeModal }: ModalProps) => {
               <p className="text-gray-400">
                 <strong>Ano de lançamento:</strong> {selectedMovie.release_date.split("-")[0]}
               </p>
-              <p className="text-gray-400">
-                <strong>Gêneros:</strong>{" "}
-                {selectedMovie.genres.map((genre) => genre.name).join(", ")}
-              </p>
-              <p className="text-gray-400">
-                <strong>Duração:</strong> {selectedMovie.runtime} minutos
-              </p>
+              {selectedMovie.genres && (
+                <p className="text-gray-400">
+                  <strong>Gêneros:</strong>{" "}
+                  {selectedMovie.genres.map((genre) => genre.name).join(", ")}
+                </p>
+              )}
+              {selectedMovie.runtime && (
+                <p className="text-gray-400">
+                  <strong>Duração:</strong> {selectedMovie.runtime} minutos
+                </p>
+              )}
               <p className="text-gray-400">
                 <strong>Classificação indicativa:</strong>{" "}
-                {selectedMovie.adult ? "18+" : "sem classificação"}
+                {selectedMovie.adult ? "18+" : "Livre"}
               </p>
               <p className="text-[#F6CA2A]">
-                <strong className="text-gray-400">Nota média:</strong> {selectedMovie.vote_average.toFixed(1)}/10
+                <strong className="text-gray-400">Nota média:</strong>{" "}
+                {selectedMovie.vote_average.toFixed(1)}/10
               </p>
             </div>
           </div>

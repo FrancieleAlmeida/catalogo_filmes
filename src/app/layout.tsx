@@ -3,10 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SearchBar } from "@/components/SearchBar";
 import Link from "next/link";
 import "./globals.css";
-<<<<<<< HEAD
-import { Search } from "lucide-react";
-=======
->>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
 
 
 const geistSans = Geist({

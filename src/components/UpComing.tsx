@@ -10,6 +10,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from 'next/image';
+
 
 export function UpComing() {
   const [error, setError] = useState("");
@@ -42,11 +44,7 @@ export function UpComing() {
           setError("A API não retornou uma lista válida.");
         }
       })
-<<<<<<< HEAD
-      .catch((err) => {
-=======
       .catch((err: Error) => {
->>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
         console.error("Erro ao buscar os em breve:", err);
         setError("Erro ao carregar filmes.");
       });
@@ -82,9 +80,11 @@ export function UpComing() {
                 <div className="relative w-full h-full shadow-md rounded-xl border-none bg-transparent">
                   <Card className="w-full h-full bg-transparent border-none">
                     <CardContent className="flex flex-col items-center p-2 sm:p-4">
-                      <img
+                      <Image
                         src={`https://image.tmdb.org/t/p/w500${popular.poster_path}`}
                         alt={popular.title}
+                        width={500}
+                        height={750}
                         className="w-full h-full object-cover rounded-lg shadow-lg"
                       />
                       <CardTitle className="text-sm sm:text-lg font-bold text-center mt-4 text-white break-words">

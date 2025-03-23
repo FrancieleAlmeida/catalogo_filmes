@@ -4,41 +4,39 @@ import { useSearchParams } from "next/navigation";
 import { searchMovies, getDetails } from "@/lib/api";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Modal } from "@/components/Modal";
+import Image from 'next/image';
+
+export interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+  release_date: string;
+  overview: string;
+  vote_average: number;
+  adult: boolean;
+  genres?: { id: number; name: string }[];
+  runtime?: number;
+}
 
 export default function MovieList() {
   const searchParams = useSearchParams() ?? new URLSearchParams();
   const query = searchParams.get("query") || "";
-  const [movies, setMovies] = useState<any[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState<{
-    id: number;
-    title: string;
-    poster_path: string;
-    release_date: string;
-    overview: string;
-    genres: { id: number; name: string }[];
-    runtime: number;
-    vote_average: number;
-    adult: boolean;
-  } | null>(null);
-
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   useEffect(() => {
     if (query) {
       setIsLoading(true);
       setError("");
 
       searchMovies(query)
-        .then((data) => {
+        .then((data: Movie[]) => {
           setMovies(data);
           setIsLoading(false);
         })
-<<<<<<< HEAD
-        .catch((err) => {
-=======
         .catch((err: Error) => {
->>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
           setError("Erro ao buscar filmes. Tente novamente.");
           setIsLoading(false);
         });
@@ -52,12 +50,7 @@ export default function MovieList() {
       const movieDetails = await getDetails(movieId);
       setSelectedMovie(movieDetails);
       setIsModalOpen(true);
-<<<<<<< HEAD
-    } catch (err) {
-      console.error("Erro ao buscar detalhes do filme:", err);
-=======
-    } catch{
->>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
+    } catch {
       setError("Erro ao carregar detalhes do filme.");
     }
   };
@@ -87,10 +80,12 @@ export default function MovieList() {
                 <div className="relative w-full h-full shadow-md rounded-xl border-none bg-transparent">
                   <Card className="w-full h-full bg-transparent border-none">
                     <CardContent className="flex flex-col items-center p-2 sm:p-4">
-                      <img
+                      <Image
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={movie.title}
                         className="w-full h-full object-cover rounded-lg shadow-lg"
+                        width={500}
+                        height={750}
                       />
                       <CardTitle className="text-sm sm:text-lg font-bold text-center mt-4 text-white break-words">
                         {movie.title}

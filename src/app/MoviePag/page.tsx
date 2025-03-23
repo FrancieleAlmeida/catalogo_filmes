@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getDetails, getMovie } from "@/lib/api"; 
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Modal } from "@/components/Modal";
+import Image from 'next/image';
+
 
 export default function Movies() {
   const [movies, setMovies] = useState<any[]>([]);
@@ -30,11 +32,7 @@ export default function Movies() {
         setMovies(data.results);
         setIsLoading(false);
       })
-<<<<<<< HEAD
-      .catch((err) => {
-=======
       .catch((err: Error) => {
->>>>>>> 45f27e556f2b5ef082b740a094fa317505fa6dbd
         setError("Erro ao carregar filmes. Tente novamente.");
         setIsLoading(false);
       });
@@ -69,9 +67,11 @@ export default function Movies() {
               <div className="relative w-full h-full shadow-md rounded-xl border-none bg-transparent">
                 <Card className="w-full h-full bg-transparent border-none">
                   <CardContent className="flex flex-col items-center p-2 sm:p-4">
-                    <img
+                    <Image
                       src={`https://image.tmdb.org/t/p/w500${popular.poster_path}`}
                       alt={popular.title}
+                      width={500}
+                      height={750}
                       className="w-full h-full object-cover rounded-lg shadow-lg"
                     />
                     <CardTitle className="text-sm sm:text-lg font-bold text-center mt-4 text-white break-words">
